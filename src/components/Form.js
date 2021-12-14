@@ -4,7 +4,6 @@ import * as yup from "yup";
 import Button from "@mui/material/Button";
 import CustomTextField from "./CustomTextField";
 import Tags from "./Tags";
-import { Autocomplete } from "@mui/material";
 
 const validationSchema = yup.object({
   title: yup.string("Enter title of article").required("Title is required"),

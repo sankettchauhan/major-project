@@ -14,7 +14,8 @@ export default function ArticleNew() {
       try {
         initializeFirebaseApp();
         const db = firestoreDb();
-        const docRef = await addDoc(collection(db, "articles"), article);
+        // create article
+        await addDoc(collection(db, "articles"), article);
         navigate("/");
         //   TODO: add snack - success and fail
       } catch (error) {
@@ -24,7 +25,7 @@ export default function ArticleNew() {
     if (article?.title && article?.content) {
       createArticle();
     }
-  }, [article]);
+  }, [article, navigate]);
   return (
     <>
       <ResponsiveDrawer title={"Add an Article"}>

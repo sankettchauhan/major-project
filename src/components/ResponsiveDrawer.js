@@ -35,7 +35,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       {lists.map((list, listIndex) => (
-        <List>
+        <List key={`list-${listIndex}`}>
           {list.map((item, index) => (
             <ListItem button key={item.key} onClick={() => navigate(item.link)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
