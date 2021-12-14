@@ -3,6 +3,7 @@ import { firestoreDb, initializeFirebaseApp } from "../firebase/config";
 import { CircularProgress } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import ResponsiveDrawer from "../components/ResponsiveDrawer";
 
 initializeFirebaseApp();
 const db = firestoreDb();
@@ -14,6 +15,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // loads all the articles in the db
     async function load() {
       try {
         const querySnapshot = await getDocs(collection(db, "articles"));
@@ -41,8 +43,8 @@ export default function Home() {
   if (loading) return <CircularProgress />;
 
   return (
-    <>
-      <button>add article</button>
+    <ResponsiveDrawer title={"Home"}>
+      <button onClick={() => navigate(`/article/add`)}>add article</button>
       {articles?.map((article, index) => (
         <div>
           <button onClick={() => navigate(`/article/${article.id}`)}>
@@ -50,6 +52,6 @@ export default function Home() {
           </button>
         </div>
       ))}
-    </>
+    </ResponsiveDrawer>
   );
 }

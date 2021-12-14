@@ -3,6 +3,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { firestoreDb, initializeFirebaseApp } from "../firebase/config";
 import { CircularProgress } from "@mui/material";
+import ResponsiveDrawer from "../components/ResponsiveDrawer";
 
 export default function Article() {
   const [article, setArticle] = useState({});
@@ -36,10 +37,12 @@ export default function Article() {
 
   if (article?.title)
     return (
-      <div>
-        <h1>{article.title}</h1>
-        <h3>{article.content}</h3>
-      </div>
+      <ResponsiveDrawer title={"title"}>
+        <div>
+          <h1>{article.title}</h1>
+          <h3>{article.content}</h3>
+        </div>
+      </ResponsiveDrawer>
     );
 
   return <h1>nothing returned!</h1>;
