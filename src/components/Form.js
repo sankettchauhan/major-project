@@ -2,8 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import CustomTextField from "./CustomTextField";
+import Tags from "./Tags";
+import { Autocomplete } from "@mui/material";
 
 const validationSchema = yup.object({
   title: yup.string("Enter title of article").required("Title is required"),
@@ -12,6 +13,7 @@ const validationSchema = yup.object({
 });
 
 export default function Form({ setArticle }) {
+  const [tags, setTags] = React.useState([]);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -20,7 +22,7 @@ export default function Form({ setArticle }) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      setArticle(values);
+      setArticle({ ...values, tags });
     },
   });
 
@@ -46,6 +48,7 @@ export default function Form({ setArticle }) {
           formik={formik}
           disabled={true}
         />
+        <Tags tags={tags} setTags={setTags} />
         <Button
           sx={{ marginTop: "1em" }}
           color="primary"
