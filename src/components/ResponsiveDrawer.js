@@ -32,7 +32,17 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <Box style={{ width: "100%" }}>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{ fontFamily: "Verdana", fontWeight: "bold" }}
+          >
+            Madhyam
+          </Typography>
+        </Box>
+      </Toolbar>
       <Divider />
       {lists.map((list, listIndex) => (
         <List key={`list-${listIndex}`}>
