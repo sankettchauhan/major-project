@@ -51,6 +51,7 @@ export default function Home() {
           variant="contained"
           onClick={() => navigate(`/article/${article.id}`)}
           sx={{ marginBottom: "1em", marginLeft: "0.5em" }}
+          key={`key-${article.title}`}
         >
           {article.title}
         </Button>

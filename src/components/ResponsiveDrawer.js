@@ -81,7 +81,12 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h5"
+            noWrap
+            component="div"
+            style={{ textTransform: "uppercase" }}
+          >
             {title}
           </Typography>
         </Toolbar>

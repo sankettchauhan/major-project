@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { firestoreDb, initializeFirebaseApp } from "../firebase/config";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Box, Typography } from "@mui/material";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 
 export default function Article() {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
+  // console.log(article);
 
   useEffect(() => {
     async function load() {
@@ -37,11 +38,25 @@ export default function Article() {
 
   if (article?.title)
     return (
-      <ResponsiveDrawer title={"title"}>
-        <div>
-          <h1>{article.title}</h1>
-          <h3>{article.content}</h3>
-        </div>
+      <ResponsiveDrawer title={"article"}>
+        <Box>
+          <Typography variant="h2" style={{ textTransform: "capitalize" }}>
+            {article.title}
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="body1" style={{ marginBottom: "10px" }}>
+            Created at {new Date(article.dateCreated).toLocaleDateString()}
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            variant="body1"
+            style={{ fontSize: "2em", fontWeight: 100 }}
+          >
+            {article.content}
+          </Typography>
+        </Box>
       </ResponsiveDrawer>
     );
 
