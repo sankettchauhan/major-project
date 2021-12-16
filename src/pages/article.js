@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { firestoreDb, initializeFirebaseApp } from "../firebase/config";
-import { CircularProgress, Box, Typography } from "@mui/material";
+import { CircularProgress, Box, Typography, Chip } from "@mui/material";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 
 export default function Article() {
@@ -40,7 +40,7 @@ export default function Article() {
     return (
       <ResponsiveDrawer title={"article"}>
         <Box>
-          <Typography variant="h2" style={{ textTransform: "capitalize" }}>
+          <Typography variant="h3" style={{ textTransform: "capitalize" }}>
             {article.title}
           </Typography>
         </Box>
@@ -50,12 +50,36 @@ export default function Article() {
           </Typography>
         </Box>
         <Box>
-          <Typography
-            variant="body1"
-            style={{ fontSize: "2em", fontWeight: 100 }}
-          >
-            {article.content}
-          </Typography>
+          {article.content.length > 0 && (
+            <>
+              {article.content.map((paragraph, index) => (
+                <Box key={`${article.title}-para-${index + 1}`}>
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: "1.5em", fontWeight: 100 }}
+                  >
+                    {paragraph}
+                  </Typography>
+                </Box>
+              ))}
+            </>
+          )}
+        </Box>
+        <Box>
+          {article.tags.length > 0 && (
+            <>
+              <Typography style={{ marginTop: "1em" }}>
+                Tags:{" "}
+                {article.tags.map((tag, index) => (
+                  <Chip
+                    key={`${article.title}-tag-${index + 1}`}
+                    label={tag}
+                    sx={{ marginRight: "5px" }}
+                  />
+                ))}{" "}
+              </Typography>
+            </>
+          )}
         </Box>
       </ResponsiveDrawer>
     );

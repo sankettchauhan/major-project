@@ -3,25 +3,24 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
 import CustomTextField from "./CustomTextField";
-import Tags from "./Tags";
+import MultiTextInput from "./MultiTextInput";
 
 const validationSchema = yup.object({
   title: yup.string("Enter title of article").required("Title is required"),
-  content: yup.string("Enter body of article").required("Body is required"),
   dateCreated: yup.date().required(),
 });
 
 export default function Form({ setArticle }) {
   const [tags, setTags] = React.useState([]);
+  const [content, setContent] = React.useState([]);
   const formik = useFormik({
     initialValues: {
       title: "",
-      content: "",
       dateCreated: new Date().toISOString(),
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      setArticle({ ...values, tags });
+      setArticle({ ...values, tags, content });
     },
   });
 
@@ -34,12 +33,10 @@ export default function Form({ setArticle }) {
           label="Enter title"
           formik={formik}
         />
-        <CustomTextField
-          name="content"
-          label="Enter content"
-          formik={formik}
-          multiline={true}
-          rows={4}
+        <MultiTextInput
+          value={content}
+          setValue={setContent}
+          label={"Enter content"}
         />
         <CustomTextField
           name="dateCreated"
@@ -47,7 +44,8 @@ export default function Form({ setArticle }) {
           formik={formik}
           disabled={true}
         />
-        <Tags tags={tags} setTags={setTags} />
+        {/* tags */}
+        <MultiTextInput value={tags} setValue={setTags} label={"Enter tags"} />
         <Button
           sx={{ marginTop: "1em" }}
           color="primary"
