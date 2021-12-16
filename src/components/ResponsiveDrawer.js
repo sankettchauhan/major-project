@@ -39,7 +39,7 @@ function ResponsiveDrawer(props) {
             align="center"
             sx={{ fontFamily: "Verdana", fontWeight: "bold" }}
           >
-            Madhyam
+            Maadhyam
           </Typography>
         </Box>
       </Toolbar>
